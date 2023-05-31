@@ -1,0 +1,537 @@
+%%
+%% This is file `sample-manuscript.tex',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% samples.dtx  (with options: `manuscript')
+%% 
+%% IMPORTANT NOTICE:
+%% 
+%% For the copyright see the source file.
+%% 
+%% Any modified versions of this file must be renamed
+%% with new filenames distinct from sample-manuscript.tex.
+%% 
+%% For distribution of the original source see the terms
+%% for copying and modification in the file samples.dtx.
+%% 
+%% This generated file may be distributed as long as the
+%% original source files, as listed above, are part of the
+%% same distribution. (The sources need not necessarily be
+%% in the same archive or directory.)
+%%
+%% Commands for TeXCount
+%TC:macro \cite [option:text,text]
+%TC:macro \citep [option:text,text]
+%TC:macro \citet [option:text,text]
+%TC:envir table 0 1
+%TC:envir table* 0 1
+%TC:envir tabular [ignore] word
+%TC:envir displaymath 0 word
+%TC:envir math 0 word
+%TC:envir comment 0 0
+%%
+%%
+%% The first command in your LaTeX source must be the \documentclass command.
+%%%% Small single column format, used for CIE, CSUR, DTRAP, JACM, JDIQ, JEA, JERIC, JETC, PACMCGIT, TAAS, TACCESS, TACO, TALG, TALLIP (formerly TALIP), TCPS, TDSCI, TEAC, TECS, TELO, THRI, TIIS, TIOT, TISSEC, TIST, TKDD, TMIS, TOCE, TOCHI, TOCL, TOCS, TOCT, TODAES, TODS, TOIS, TOIT, TOMACS, TOMM (formerly TOMCCAP), TOMPECS, TOMS, TOPC, TOPLAS, TOPS, TOS, TOSEM, TOSN, TQC, TRETS, TSAS, TSC, TSLP, TWEB.
+% \documentclass[acmsmall]{acmart}
+
+%%%% Large single column format, used for IMWUT, JOCCH, PACMPL, POMACS, TAP, PACMHCI
+% \documentclass[acmlarge,screen]{acmart}
+
+%%%% Large double column format, used for TOG
+% \documentclass[acmtog, authorversion]{acmart}
+
+%%%% Generic manuscript mode, required for submission
+%%%% and peer review
+\documentclass[manuscript,screen,review]{acmart}
+%% Fonts used in the template cannot be substituted; margin 
+%% adjustments are not allowed.
+%%
+%% \BibTeX command to typeset BibTeX logo in the docs
+\AtBeginDocument{%
+  \providecommand\BibTeX{{%
+    \normalfont B\kern-0.5em{\scshape i\kern-0.25em b}\kern-0.8em\TeX}}}
+
+%% Rights management information.  This information is sent to you
+%% when you complete the rights form.  These commands have SAMPLE
+%% values in them; it is your responsibility as an author to replace
+%% the commands and values with those provided to you when you
+%% complete the rights form.
+%\setcopyright{acmcopyright}
+%\copyrightyear{2018}
+%\acmYear{2018}
+%\acmDOI{XXXXXXX.XXXXXXX}
+
+%% These commands are for a PROCEEDINGS abstract or paper.
+%\acmConference[Conference acronym 'XX]{Make sure to enter the correct
+%  conference title from your rights confirmation emai}{June 03--05,
+%  2018}{Woodstock, NY}
+%
+%  Uncomment \acmBooktitle if th title of the proceedings is different
+%  from ``Proceedings of ...''!
+%
+%\acmBooktitle{Woodstock '18: ACM Symposium on Neural Gaze Detection,
+% June 03--05, 2018, Woodstock, NY} 
+%\acmPrice{15.00}
+%\acmISBN{978-1-4503-XXXX-X/18/06}
+
+
+%%
+%% Submission ID.
+%% Use this when submitting an article to a sponsored event. You'll
+%% receive a unique submission ID from the organizers
+%% of the event, and this ID should be used as the parameter to this command.
+%%\acmSubmissionID{123-A56-BU3}
+
+%%
+%% For managing citations, it is recommended to use bibliography
+%% files in BibTeX format.
+%%
+%% You can then either use BibTeX with the ACM-Reference-Format style,
+%% or BibLaTeX with the acmnumeric or acmauthoryear sytles, that include
+%% support for advanced citation of software artefact from the
+%% biblatex-software package, also separately available on CTAN.
+%%
+%% Look at the sample-*-biblatex.tex files for templates showcasing
+%% the biblatex styles.
+%%
+
+%%
+%% The majority of ACM publications use numbered citations and
+%% references.  The command \citestyle{authoryear} switches to the
+%% "author year" style.
+%%
+%% If you are preparing content for an event
+%% sponsored by ACM SIGGRAPH, you must use the "author year" style of
+%% citations and references.
+%% Uncommenting
+%% the next command will enable that style.
+%%\citestyle{acmauthoryear}
+
+%%
+%% end of the preamble, start of the body of the document source.
+
+\newcommand{\commentt}[1]{}
+
+\usepackage{cleveref}
+
+\begin{document}
+\SweaveOpts{concordance=TRUE}
+
+%%
+%% The "title" command has an optional parameter,
+%% allowing the author to define a "short title" to be used in page headers.
+\title{Machine Learning Prediction of Political Orientation using Portraits of US Congress Members}
+
+%%%%%%% OLD INTRODUCTION
+\commentt{ %begin long comment
+The dataset constructed for this analysis was obtained from Facebook. Facebook profile IDs were scraped from new members of 2 Facebook ``Groups'': republicans from \href{https://www.facebook.com/groups/RU4TX/}{Republicans in Texas}, and democrats from \href{https://www.facebook.com/groups/111188856119651/}{Democratic Voices for Biden/Harris 2024}. The python API wrapper \href{https://github.com/kevinzg/facebook-scraper}{\texttt{facebook-scraper}} was used to obtain URLs to each user's profile picture. Then, profile pictures were scanned for faces and cropped to a common size of 120 x 120 pixels using the Haar Cascades facial detection algorithm.
+
+Assumptions of the following analysis due to the method of dataset construction are as follows:
+
+\begin{itemize}
+\item ``Democrats'' and ``republicans'' are good proxies for ``liberal'' and ``conservative'', respectively. 
+\item Democrats/republicans on Facebook are representative of democrats and republicans in general. 
+\item Users that set profiles pictures of themselves versus of a non-face picture do not have different facial attributes. 
+\end{itemize}
+} %end long comment
+
+
+%%
+%% The "author" command and its associated commands are used to define
+%% the authors and their affiliations.
+%% Of note is the shared affiliation of the first two authors, and the
+%% "authornote" and "authornotemark" commands
+%% used to denote shared contribution to the research.
+\author{Jonah Edmundson}
+\authornote{Both authors contributed equally to this research.}
+%\email{trovato@corporation.com}
+%\orcid{1234-5678-9012}
+\author{Madison Greenough}
+\authornotemark[1]
+%\email{webmaster@marysville-ohio.com}
+\affiliation{%
+  \institution{University of British Columbia Okanagan}
+  %\streetaddress{P.O. Box 1212}
+  \city{Kelowna}
+  \state{BC}
+  \country{Canada}
+  %\postcode{43017-6221}
+}
+
+
+%%
+%% By default, the full list of authors will be used in the page
+%% headers. Often, this list is too long, and will overlap
+%% other information printed in the page headers. This command allows
+%% the author to define a more concise list
+%% of authors' names for this purpose.
+\renewcommand{\shortauthors}{Edmundson and Greenough}
+
+%%
+%% The abstract is a short summary of the work to be presented in the
+%% article.
+
+\begin{abstract}
+\section*{Abstract}
+\par
+Images of current and former U.S. Congress Members were gathered for the dataset to represent members of the Republican and Democrat parties. This report aims to answer the question - can a neural network model predict the political affiliation of an individual given simply their image? This leads to several other potential questions, as to whether political affiliation can be determined based on simply physical features, regardless of if a human can detect it or not. Michal Kosinski's \href{https://www.nature.com/articles/s41598-020-79310-1}{2021 paper} inspired this research, as he conducted a large study and found that political orientation was classified in 72\% of images. In this study, three different architectures were trained and tested for classifying images. This includes LeNet-5, DenseNet, and a custom architecture modified from LeNet. The LeNet-5 model outperformed the other two significantly, with test classification rates of 60.21\%, 51.76\%, and 51.41\%, respectively. All models performed better than chance, 50\%, but the models failed to perform as well as Kosinski's, likely due to dataset limitations and computational power. Future work includes sourcing larger, more representative datasets to obtain a better classification accuracy.
+
+\end{abstract}
+
+%%
+%% The code below is generated by the tool at http://dl.acm.org/ccs.cfm.
+%% Please copy and paste the code instead of the example below.
+%%
+\commentt{ %begin long comment
+\begin{CCSXML}
+<ccs2012>
+ <concept>
+  <concept_id>10010520.10010553.10010562</concept_id>
+  <concept_desc>Computer systems organization~Embedded systems</concept_desc>
+  <concept_significance>500</concept_significance>
+ </concept>
+ <concept>
+  <concept_id>10010520.10010575.10010755</concept_id>
+  <concept_desc>Computer systems organization~Redundancy</concept_desc>
+  <concept_significance>300</concept_significance>
+ </concept>
+ <concept>
+  <concept_id>10010520.10010553.10010554</concept_id>
+  <concept_desc>Computer systems organization~Robotics</concept_desc>
+  <concept_significance>100</concept_significance>
+ </concept>
+ <concept>
+  <concept_id>10003033.10003083.10003095</concept_id>
+  <concept_desc>Networks~Network reliability</concept_desc>
+  <concept_significance>100</concept_significance>
+ </concept>
+</ccs2012>
+\end{CCSXML}
+
+\ccsdesc[500]{Computer systems organization~Embedded systems}
+\ccsdesc[300]{Computer systems organization~Redundancy}
+\ccsdesc{Computer systems organization~Robotics}
+\ccsdesc[100]{Networks~Network reliability}
+} %end long comment
+
+%%
+%% Keywords. The author(s) should pick words that accurately describe
+%% the work being presented. Separate the keywords with commas.
+\keywords{datasets, neural networks, web-scraping, politics, facial analysis, CNN, classification}
+
+%% A "teaser" image appears between the author and affiliation
+%% information and the body of the document, and typically spans the
+%% page.
+\begin{teaserfigure}
+  \includegraphics[width=\textwidth]{../presentation/lenet5.png}
+  \caption{LeNet-5 Architecture.}
+  \Description{description}
+  \label{fig:teaser}
+\end{teaserfigure}
+
+%\received{20 February 2007}
+%\received[revised]{12 March 2009}
+%\received[accepted]{5 June 2009}
+
+%%
+%% This command processes the author and affiliation and title
+%% information and builds the first part of the formatted document.
+\maketitle
+
+\section{Introduction}
+\par
+Machine learning has been used for image classification in many revolutionizing ways, including classifying different species. There has also been moral controversy regarding big tech firms and their biased human image classification modelling. Google made headlines in 2015 for their perceived racist image labeling (Kayser-Bril). Image classification is difficult, especially when the task is to classify something that the naked human eye cannot predict accurately. Over the years, political affiliation has become a growing source of division and controversy. The two main political groups are liberals and conservatives, also known as members of the left and right wing, or in the United States, they are referred to as Democrats and Republicans. These two groups have very distinguishing behavioural features, but can there be distinguishing physical features as well?
+\par
+In this report, the goal is to minimize all bias as absolutely necessary, to avoid the same pitfalls that Google experienced, while testing the possibility of artificial intelligence being able to predict underlying human behaviours and preferences from a simple image. Inspiration for this project came from \href{ttps://www.nature.com/articles/s41598-020-79310-1 }{this link}. This would be a feat more capable than humans themselves. If successful, this model could open up a number of possibilities. Advertising companies could better target ads based on traditional behaviours of people based on their political affiliation. Voting modelling could better predict the outcome of elections by simply using images of citizens. There are numerous possibilities that would generate significant revenue and innovation for societies around the world.
+
+\section{Background}
+
+\subsection{Dataset}
+\par
+The dataset for this project was obtained from the \href{https://www.congress.gov/members}{US Congress Members} archive. This includes images of 2,515 current and former members of the U.S. Congress spanning from 1973 to 2024, which includes the 93rd to 118th Congress. Representation from all US States were present. Photos of each member as well as their party affiliation (republican or democrat) were recorded. Members with an affiliation of ``independent'' were removed. After data collection, the rows were shuffled, and the dataset was split into training (80\%), validation (5\%) and testing (15\%). The dataset contained a total of 1,889 rows. Further pre-processing was done and images were resized to 120 by 100 pixels (height by width) and converted to grayscale. Before CNN training, images were sequentially augmented thrice using the IMAGENET AutoAugment policy. 
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=\linewidth]{../presentation/batch_both.png}
+  \caption{Left: A subset of one batch before augmentation (64/128). Right: A subset of one batch after image augmentation (64/128).}
+  \label{fig:batch}
+  \Description{text}
+\end{figure}
+
+\subsection{Assumptions}
+
+When conducting this analysis, the following assumptions were made in order to continue:
+
+\begin{itemize}
+\item ``Democrats'' and ``republicans'' are good proxies for ``liberal'' and ``conservative'', respectively. 
+\item Members of US Congress are representative of democrats and republicans in general. 
+\item Democrats and republicans have different facial attributes. 
+\end{itemize}
+
+These assumptions allowed us to collect the dataset mentioned above. It also allowed us to reasonably gather a dataset that could represent our two parties. Note that we did attempt to gather data of ordinary public members by scraping Facebook profile IDs from new members of 2 Facebook ``Groups'': republicans from \href{https://www.facebook.com/groups/RU4TX/}{Republicans in Texas}, and democrats from \href{https://www.facebook.com/groups/111188856119651/}{Democratic Voices for Biden/Harris 2024}. This method could not complete a large enough dataset for this analysis due to Facebook permissions, despite repeated attempts.
+
+\section{Methods}
+
+\subsection{Architecture}
+\par
+Three different architectures were trained and tested for classifying the images. These were LeNet-5, DenseNet, and a custom architecture (created from a modified LeNet). The specific architectures, including features and classifiers, of these NNs can be seen below in \cref{tab:lenet5,tab:densenet,tab:custom}. The DenseNet architecture can be further investigated by visiting \href{https://github.com/andreasveit/densenet-pytorch}{this GitHub repo}. Specifics regarding performance comparison between the three main methods can be found in the results section.
+
+\begin{table}[h!]
+  \caption{}
+  \label{tab:lenet5}
+  \begin{tabular}{lcl}
+    \textbf{LeNet-5} \\
+    \toprule
+    \textit{Features} \\
+    \midrule
+    Convolutional Layer &  & Kernel Size = 4 \\
+    Tanh Activation & & \\
+    Max Pooling Layer & & Kernel Size = 2\\
+    Convolutional Layer &  & Kernel Size = 14 \\
+    Tanh Activation & & \\
+    Max Pooling Layer & & Kernel Size = 4\\
+     & & \\
+    \textit{Classifier} \\
+    \midrule
+    Linear & 1408 In & 120 Out\\
+    Tanh Activation & & \\
+    Dropout & & 0.7 \\
+    Linear & 120 In & 84 Out\\
+    Tanh Activation & & \\
+    Dropout & & 0.8 \\
+    Linear & 84 In & 2 Out\\
+  \bottomrule
+\end{tabular}
+\end{table}
+
+
+\begin{table}[h!]
+\caption{}
+  \label{tab:densenet}
+  \begin{tabular}{lcl}
+    \textbf{DenseNet} \\
+    \toprule
+    \textit{Features} \\
+    \midrule
+    Dense Block &  &  \\
+    Transition Block & & \\
+    Dense Block &  &  \\
+    Transition Block & & \\
+    Dense Block &  &  \\
+    Batch Normalization & & \\
+    \textit{Classifier} \\
+    \midrule
+    ReLU Activation &  & \\
+    Linear & 24 In & 2 Out\\
+    \bottomrule
+\end{tabular}
+\end{table}
+
+
+\begin{table}[h!]
+\caption{}
+  \label{tab:custom}
+  \begin{tabular}{lcl}
+    \textbf{Modified LeNet-5 (Custom)} \\
+    \toprule
+    \textit{Features} \\
+    \midrule
+    Convolutional Layer &  & Kernel Size = 3 \\
+    Sigmoid Activation & & \\
+    Max Pooling Layer & & Kernel Size = 2\\
+    Convolutional Layer &  & Kernel Size = 5 \\
+    Sigmoid Activation & & \\
+    Max Pooling Layer & & Kernel Size = 2\\
+    Convolutional Layer &  & Kernel Size = 8 \\
+    Sigmoid Activation & & \\
+    Max Pooling Layer & & Kernel Size = 2\\
+     & & \\
+    \textit{Classifier} \\
+    \midrule
+    Linear & 1120 In & 120 Out\\
+    Tanh Activation & & \\
+    Dropout & & 0.8 \\
+    Linear & 120 In & 84 Out\\
+    Tanh Activation & & \\
+    Dropout & & 0.6 \\
+    Linear & 84 In & 2 Out\\
+  \bottomrule
+\end{tabular}
+\end{table}
+
+
+\subsection{Tuning}
+\par
+Many attempts were made to tune the each of the models in order to raise the classification accuracy for the test data set. Learning rate, batch size, number of epochs, dropout rate, number of features, weight decay, and depth (found only in DenseNet) were systematically altered individually. Many iterations of each of the three models were run with these various hyperparameter values. The best values for each hyperparameter were discovered for each of the models, and can be seen in \cref{tab:params}. These final values each improved the model accuracy for all three approaches.
+
+\begin{table}[h!]
+\caption{}
+  \label{tab:params}
+  \begin{tabular}{lccc}
+    \textbf{Hyperparameters} & LeNet-5 & DenseNet & Custom \\
+    \toprule
+    \textit{Learning Rate} & 0.001 & 0.0012 & 0.0015  \\
+    \textit{Batch Size} & 128 & 128 & 128\\
+    \textit{Epochs} & 12 & 15 & 15 \\
+    \textit{Drop out} & 0.7, 0.8 & 0 & 0.8, 0.6 \\
+    \textit{Features} & 12,000 & 12,000 & 12,000 \\
+    \textit{Classes} & 2 & 2 & 2  \\
+    \textit{Weight Decay} & 0.0002 & 0.0001 &  0.0001 \\
+    \textit{Depth} & \textit{NA} & 4 & \textit{NA} \\
+    \bottomrule
+\end{tabular}
+\end{table}
+
+\section{Results}
+\par
+The LeNet-5 model outperformed DenseNet and the custom LeNet by a significant margin, even after extensive tuning. See the comparison in test error between the three models in this plot (\cref{fig:test}). LeNet-5 obtained a test classification rate of 60.21\%. DenseNet and custom LeNet achieved classification rates of 51.76\% and 51.41\%, respectively. This shows that LeNet-5 was significantly better than both of the two remaining models by approximately 9\%. Several other metrics such as the precision, recall and F1 were also considered and gave similar results. It is interesting to note that the DenseNet and custom LeNet performed very similarly with respect to their classification rate, despite being very different models. These last two models perform only slightly better than random chance, as random chance is given by a 50\% classification accuracy, while basic LeNet-5 performs decently well, but there is still questions regarding its reliability. The 60\% mark is better than random chance, and possibly better than the naked human eye, but it is not a strong enough result to create a reliable model. Our goal at the beginning was to be able to better predict political affiliation compared to humans, which you could assume is no better than chance, so it is still a possibility that this goal has been reached. The convolutional filters of both convolutional layers for LeNet-5 can be seen in \cref{fig:filters}.
+\par
+Interestingly, \cref{fig:train,fig:valid} show that while all the models were able to converge to a solution on the training data, this convergence did not lead to better classification for the validation set. For the training data, all three models were able to converge to the minimum cost in only two epochs. In contrast, for the validation data, the models just seem to jump around without improving for all 15 epochs. 
+
+\section{Discussion}
+\par
+Upon reflection of the performance of the various models tested, it is worth noting that the test classification rate was higher than the train classification rate. Although not impossible, we were quite perplexed as to why this was the case. After careful consideration, it was speculated that this is occurring because the training data is augmented whereas the testing data is not, so the model is able to more easily classify the test set images because of this, which resulted in the higher rate for the test set rather than the train set.
+\par
+Although the model performed better than chance, and potentially better than an impartial human being could guess, the performance was not at the level that we would have liked. The poor classification rate of the NN may have occurred because of these potential reasons listed below:
+
+\begin{enumerate}
+\item There could be no actual difference in facial features between democrats and republicans. 
+\item There are facial differences between democrats and republicans, but this dataset is too small to pick up on these subtle facial differences. Or, these specific formal images of the congress members may not represent the facial differences the best
+\item The classifier section of the NN works well, but the convolution section is not accurately picking up the meaningful facial features that are able to distinguish between the two parties. 
+\item The convolution section of the NN is able to pick up on some meaningful signals, but the classification section is not performing well. 
+\item The NN is only picking up features in the background of the image (and not the facial features), which are not predictive nor meaningful. 
+\end{enumerate}
+
+Out of all of these potential reasons, we believe that the fifth option is a more likely situation as to why the model is not performing as well as it could.
+
+
+\section{Limitations \& Future Work}
+\par
+In order to rectify the low classification rate of the NN, as well as to iron out the assumptions listed earlier in this report, a new dataset should be collected. Ideally, the dataset would be collected from public social media profiles such as Facebook or dating websites, as per our original intentions. This new dataset should also be much larger, ideally by several orders of magnitude. Once this dataset is collected, more complex NN architectures could be attempted. If this were to be done, we speculate that the classification rate would increase, as was seen in the Kosinski (2021) paper.
+
+
+\section{References}
+\par
+Andreasveit. (n.d.). Andreasveit/densenet-pytorch: A pytorch implementation for densely connected Convolutional Networks (DenseNets). GitHub. Retrieved April 21, 2023, from https://github.com/andreasveit/densenet-pytorch 
+\par
+Congress.Gov. (n.d.). Members of the U.S. congress | Congress.gov | Library of Congress. Members of the U.S. Congress. Retrieved April 21, 2023, from https://www.congress.gov/members 
+\par
+Kayser-Bril, N. (n.d.). Image classification algorithms at Apple, Google still push racist tropes. AlgorithmWatch. Retrieved April 20, 2023, from https://algorithmwatch.org/en/apple-google-computer-vision-racist/ 
+\par
+Kosinski, M. (2021, January 11). Facial recognition technology can expose political orientation from naturalistic facial images. Nature News. Retrieved April 21, 2023, from https://www.nature.com/articles/s41598-020-79310-1 
+
+
+\section{Appendix}
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=\linewidth]{../presentation/filters.png}
+  \caption{The convolutional filters of the first and second convolutional layers.}
+  \label{fig:filters}
+  \Description{text}
+\end{figure}
+
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=\linewidth]{../presentation/training_cost.png}
+  \caption{The training cost over 15 epochs for the 3 architectures considered.}
+  \label{fig:train}
+  \Description{text}
+\end{figure}
+
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=\linewidth]{../presentation/validation_error.png}
+  \caption{The validation error over 15 epochs for the 3 architectures considered.}
+  \label{fig:valid}
+  \Description{text}
+\end{figure}
+
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=\linewidth]{../presentation/finaltest_error.png}
+  \caption{The final testing error for the 3 architectures considered.}
+  \label{fig:test}
+  \Description{text}
+\end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\commentt{ %begin long comment out 
+Immediately following this sentence is the point at which
+Table~\ref{tab:freq} is included in the input file; compare the
+placement of the table here with the table in the printed output of
+this document.
+
+\begin{table}
+  \caption{Frequency of Special Characters}
+  \label{tab:freq}
+  \begin{tabular}{ccl}
+    \toprule
+    Non-English or Math&Frequency&Comments\\
+    \midrule
+    \O & 1 in 1,000& For Swedish names\\
+    $\pi$ & 1 in 5& Common in math\\
+    \$ & 4 in 5 & Used in business\\
+    $\Psi^2_1$ & 1 in 40,000& Unexplained usage\\
+  \bottomrule
+\end{tabular}
+\end{table}
+
+To set a wider table, which takes up the whole width of the page's
+live area, use the environment \textbf{table*} to enclose the table's
+contents and the table caption.  As with a single-column table, this
+wide table will ``float'' to a location deemed more
+desirable. Immediately following this sentence is the point at which
+Table~\ref{tab:commands} is included in the input file; again, it is
+instructive to compare the placement of the table here with the table
+in the printed output of this document.
+
+\begin{table*}
+  \caption{Some Typical Commands}
+  \label{tab:commands}
+  \begin{tabular}{ccl}
+    \toprule
+    Command &A Number & Comments\\
+    \midrule
+    \texttt{{\char'134}author} & 100& Author \\
+    \texttt{{\char'134}table}& 300 & For tables\\
+    \texttt{{\char'134}table*}& 400& For wider tables\\
+    \bottomrule
+  \end{tabular}
+\end{table*}
+
+
+\section{Figures}
+
+The ``\verb|figure|'' environment should be used for figures. One or
+more images can be placed within a figure. If your figure contains
+third-party material, you must clearly identify it as such, as shown
+in the example below.
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=\linewidth]{snake.jpg}
+  \caption{1907 Franklin Model D roadster. Photograph by Harris \&
+    Ewing, Inc. [Public domain], via Wikimedia
+    Commons. (\url{https://goo.gl/VLCRBB}).}
+  \Description{A woman and a girl in white dresses sit in an open car.}
+\end{figure}
+
+Your figures should contain a caption which describes the figure to
+the reader.
+
+Figure captions are placed {\itshape below} the figure.
+}
+
+
+
+
+\end{document}
+\endinput
+%%
+%% End of file `sample-authordraft.tex'.
